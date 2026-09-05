@@ -203,7 +203,7 @@ h1, h2, h3, .brand, .nav-link, .section-title {
     aspect-ratio: 1 / 1;
     object-fit: cover;
     border-radius: var(--radius);
-    border: 3px solid var(--carbon-black);
+    border: 5px solid var(--blue-gradient);
 }
 
 
