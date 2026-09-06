@@ -231,11 +231,33 @@ h1, h2, h3, .brand, .nav-content, .section-title {
     border-radius: 2px;
 }
 
+.section-title-dark {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--blue-violet);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+
+.section-title-dark::after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: var(--royal-blue);
+    margin: 0.5rem auto 0;
+    border-radius: 2px;
+}
+
 
 /* education */
 .education {
     padding: 4.5rem 0 5rem;
     border-top: 1px solid var(--line);
+    background-color: var(--carbon-black);
 }
 
 .education-list {
