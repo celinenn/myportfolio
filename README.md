@@ -11,7 +11,7 @@ Jurusan : Ilmu Komputer
 ### Tugas 1
 1. Iya, saya menggunakan <section> seperti pada template Tutorial 1. Elemen <section> ini dapat membantu saya dalam membuat static web karena digunakan untuk mengelompokkan konten-konten yang berhubungan dalam satu grup yang dimana grup tersebut bisa dikasih class seperti 'hero-section' dan 'experiences' untuk dikasih style dengan menggunakan css agar rapih dan dalam satu theme. Hal ini agar konten-konten tertata rapih pada web (setiap section terpisah dari yang lain) dan bisa diatur agar stylenya berbeda-beda persection.
 
-2. Agar web saya tetap responsive, tantangan tata letak yang saya temukan adalah headernya yang tidak mengadaptasi ke layar hp yang kecil. (Blm ketemu solusi at this moment lol)
+2. Agar web saya tetap responsive, tantangan tata letak yang saya temukan adalah headernya yang tidak mengadaptasi ke layar hp yang kecil. Saya berpikir untuk memindahkan navbar ke tengah saat pada mobile view, saya research cara melakukannya dengan mencari di inspect website lain dan meminta bantuan ke Gemini untuk menjelaskan kode inspect dari website lainnya tersebut.
 
 3. Batasan yang saya rasakan dalam penyajian informasi pada portofolio saya adalah bahwa saya tidak dapat menambahkan animasi-animasi yang interaktif dengan cursor saya dan tidak dapat memaukkan form untuk kontak jika ada yang ingin meng-hire saya. Yang paling ingin saya persiapkan dan tambahkan adalah form working contact itu karena dengan adanya form tersebut, user yang ingin meng-hire saya saat nanti saya pakai web ini secara official dapat kontak saya dengan mudah lewat form tersebut.
 
