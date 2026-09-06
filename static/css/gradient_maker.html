@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gradient Previewer</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --accent: #873ec7;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); padding: 2rem; display: flex; justify-content: center; }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 2rem;
+      max-width: 1100px;
+      width: 100%;
+    }
+
+    .preview-card {
+      background: var(--card-bg);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .preview-box {
+      width: 100%;
+      height: 380px;
+      border-radius: 0.75rem;
+      transition: background 0.1s ease;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);
+    }
+
+    .code-output {
+      background: #090d16;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      font-family: monospace;
+      font-size: 0.85rem;
+      word-break: break-all;
+      position: relative;
+    }
+
+    .controls-card {
+      background: var(--card-bg);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .control-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    label { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; }
+    
+    select, button {
+      background: #0f172a;
+      color: var(--text);
+      border: 1px solid #334155;
+      padding: 0.6rem 0.8rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .angle-slider { display: flex; align-items: center; gap: 0.75rem; }
+    .angle-slider input { flex: 1; accent-color: var(--accent); }
+
+    .colors-list { display: flex; flex-direction: column; gap: 0.5rem; max-height: 250px; overflow-y: auto; padding-right: 4px; }
+    .color-row { display: flex; align-items: center; gap: 0.5rem; background: #0f172a; padding: 0.4rem; border-radius: 0.5rem; }
+    .color-row input[type="color"] { border: none; width: 32px; height: 32px; background: none; cursor: pointer; }
+    .color-row input[type="text"] { background: transparent; border: none; color: #fff; width: 80px; font-family: monospace; }
+    
+    .btn-btn { background: var(--accent); border: none; font-weight: 600; }
+    .btn-btn:hover { filter: brightness(1.1); }
+    .btn-remove { background: #ef444422; color: #ef4444; border: 1px solid #ef444444; padding: 0.2rem 0.5rem; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="preview-card">
+    <div id="preview" class="preview-box"></div>
+    <div class="code-output" id="codeOutput">background: ...;</div>
+    <button class="btn-btn" onclick="copyCSS()">Copy CSS</button>
+  </div>
+
+  <div class="controls-card">
+    <div class="control-group">
+      <label>Type</label>
+      <select id="typeSelect" onchange="updateGradient()">
+        <option value="linear">Linear</option>
+        <option value="radial">Radial</option>
+      </select>
+    </div>
+
+    <div class="control-group" id="angleGroup">
+      <label>Angle (<span id="angleValue">90</span>°)</label>
+      <div class="angle-slider">
+        <input type="range" id="angleInput" min="0" max="360" value="90" oninput="updateGradient()">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label>Color Stops</label>
+      <div class="colors-list" id="colorsList"></div>
+      <button onclick="addColor()" style="margin-top: 0.5rem;">+ Add Color</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  let colors = ['#310c4c', '#873ec7', '#b58ef4', '#5175d6', '#1c1917', '#f2f0fa'];
+
+  function renderColors() {
+    const list = document.getElementById('colorsList');
+    list.innerHTML = '';
+    colors.forEach((color, i) => {
+      const row = document.createElement('div');
+      row.className = 'color-row';
+      row.innerHTML = `
+        <input type="color" value="${color}" oninput="updateColor(${i}, this.value)">
+        <input type="text" value="${color}" onchange="updateColor(${i}, this.value)">
+        <button class="btn-remove" onclick="removeColor(${i})" ${colors.length <= 2 ? 'disabled' : ''}>✕</button>
+      `;
+      list.appendChild(row);
+    });
+    updateGradient();
+  }
+
+  function updateColor(index, val) {
+    colors[index] = val;
+    renderColors();
+  }
+
+  function addColor() {
+    colors.push('#ffffff');
+    renderColors();
+  }
+
+  function removeColor(index) {
+    if (colors.length > 2) {
+      colors.splice(index, 1);
+      renderColors();
+    }
+  }
+
+  function updateGradient() {
+    const type = document.getElementById('typeSelect').value;
+    const angle = document.getElementById('angleInput').value;
+    const angleGroup = document.getElementById('angleGroup');
+    document.getElementById('angleValue').innerText = angle;
+
+    let css = '';
+    if (type === 'linear') {
+      angleGroup.style.display = 'flex';
+      css = `linear-gradient(${angle}deg, ${colors.join(', ')})`;
+    } else {
+      angleGroup.style.display = 'none';
+      css = `radial-gradient(circle, ${colors.join(', ')})`;
+    }
+
+    document.getElementById('preview').style.background = css;
+    document.getElementById('codeOutput').innerText = `background: ${css};`;
+  }
+
+  function copyCSS() {
+    const text = document.getElementById('codeOutput').innerText;
+    navigator.clipboard.writeText(text);
+    alert('CSS copied to clipboard!');
+  }
+
+  renderColors();
+</script>
+</body>
+</html>
