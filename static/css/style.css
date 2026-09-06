@@ -13,6 +13,7 @@
     --royal-blue: #5175d6ff;
     --carbon-black: #1c1917ff;
     --lavender-mist: #f2f0faff;
+    --light-lavender: #dbc5ff;
     --line: #dad7f0;
     --text-muted: #5f596b;
 
@@ -235,7 +236,7 @@ h1, h2, h3, .brand, .nav-content, .section-title {
     text-align: center;
     font-size: 2rem;
     font-weight: 700;
-    color: var(--blue-violet);
+    color: var(--bright-lavender);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: 2.5rem;
@@ -267,7 +268,7 @@ h1, h2, h3, .brand, .nav-content, .section-title {
 }
 
 .education-card {
-    background-color: #ffffff;
+    background-color: var(--light-lavender);
     border: 1px solid var(--line);
     border-radius: var(--radius);
     padding: 1.5rem;
