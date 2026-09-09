@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
 
-from main.models import Experience
+from main.models import Experience, Education
 
 
 class MainTest(TestCase):
@@ -11,6 +11,12 @@ class MainTest(TestCase):
             title="Asisten Dosen PBP",
             description="Membantu mahasiswa memahami pengembangan web.",
             category="part-time",
+        )
+
+        self.education = Education.objects.create(
+            title="Computer Science Bachelors",
+            school="Universitas Indonesia",
+            category="bachelors"
         )
 
     def test_main_url_is_accessible(self):
