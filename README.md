@@ -9,12 +9,12 @@ Jurusan : Ilmu Komputer
 -------------- Pertanyaan Relatif --------------
 
 ### Tugas 1
+
 1. Iya, saya menggunakan <section> seperti pada template Tutorial 1. Elemen <section> ini dapat membantu saya dalam membuat static web karena digunakan untuk mengelompokkan konten-konten yang berhubungan dalam satu grup yang dimana grup tersebut bisa dikasih class seperti 'hero-section' dan 'experiences' untuk dikasih style dengan menggunakan css agar rapih dan dalam satu theme. Hal ini agar konten-konten tertata rapih pada web (setiap section terpisah dari yang lain) dan bisa diatur agar stylenya berbeda-beda persection.
 
 2. Agar web saya tetap responsive, tantangan tata letak yang saya temukan adalah headernya yang tidak mengadaptasi ke layar hp yang kecil. Saya berpikir untuk memindahkan navbar ke tengah saat pada mobile view, saya research cara melakukannya dengan mencari di inspect website lain dan meminta bantuan ke Gemini untuk menjelaskan kode inspect dari website lainnya tersebut.
 
 3. Batasan yang saya rasakan dalam penyajian informasi pada portofolio saya adalah bahwa saya tidak dapat menambahkan animasi-animasi yang interaktif dengan cursor saya dan tidak dapat memaukkan form untuk kontak jika ada yang ingin meng-hire saya. Yang paling ingin saya persiapkan dan tambahkan adalah form working contact itu karena dengan adanya form tersebut, user yang ingin meng-hire saya saat nanti saya pakai web ini secara official dapat kontak saya dengan mudah lewat form tersebut.
-
 
 
 -------------- Pernyataan Penggunaan AI --------------
@@ -34,3 +34,34 @@ Proses saya mengerjakan Tugas ini dan detail penggunaan AI (detail penggunaan AI
 --> sebagai pernyataan 'SAYA TIDAK MEMBUAT WEBSITE gradient_maker.html SENDIRI, WEBSITE TERSEBUT DIBUAT OLEH GEMINI, DAN SAYA TIDAK MEMBUAT WEBSITE INI UNTUK DIMASUKKAN KE NILAI SEBAGAI PLUS POIN ATAU MINUS POIN, WEBSITE TERSEBUT HANYA UNTUK MEMBANTU SAYA DALAM PEMBUATAN GRADIENT COLORS'
 
 5. Selanjutnya saya mengatur tata letak container-container section 'Experiences' dan 'Education' dengan bantuan Gemini lagi saat saya bingung dalam membuat animasi hovernya (cara membuat dia ada shadownya, animasi hovernya gimana, dan lain-lain). Namun saat saya prompting, saya tidak mencantumkan kode css ataupun html saya agar Gemini hanya membuatkan contoh dan penjelasan sintaks saja. Saya baca contoh dan penjelasan tersebut, terus lanjut mencoba buatkan hoverin animationnya sendiri.
+
+
+
+============== Pertanyaan Relatif ==============
+
+### Tugas 2
+
+1. Alur yang terjadi ketika pengguna membuka halaman portofolio baru adalah adanya HTTPS request dari browser yang digunakan pengguna. Request ini masuk ke project urls.py yang kemudian akan memeriksa berkas url utama project dan meneruskan penanganan rute ke aplikasi urls.py. Selanjutnya, aplikasi urls.py akan mencocokkan pola rute dengan fungsi atau class view yang tepat. Selanjutnya, view akan memanggil model untuk mengambil data portofolio seperti list experience dan education dari basis data dan kemudian akan memanggil template yang sesuai dengan data model yang diambil. Model ini mengambil data portofolio yang tersimpan dalam basis data dan mengembalikannya ke view. Selanjutnya, template memanggil berkas HTML yang menerima data dari view dan kemudian merender data tersebut menjadi sebuah halaman mengikui style yang sudah ada di css file.
+
+2. Karena dengan data disimpan dalam bentuk model, bukan hardcoded, kita sebagai developer akan lebih mudah jika ingin menambahkan data baru seperti a new experience or education, karena sudah ada "template" isi datanya seperti title, description, category, dll. yang nanti akan secara otomatis kerender oleh template dengan style yang sesuai. Jika kita hardcode ke dlm index.html, kita sebagai developer akan kesusahan setiap menambah data baru karena perlu menambah section baru, div baru, dll.
+
+3. Perbedaan antara makemigrations dan migrate adalah bahwa makemigrations membaca perubahan pada file models.py, seperti penambahan model baru atau pergantian field pada model, dan membuat skrip migrasi baru. Sedangkan migrate mengeksekusikan skrip migrasi yang baru tsb ke dalam basis data nyata. Saya pikirnya ini seperti commit dan push pada git, makemigrations seperti commit dan migrate seperti push.
+
+
+-------------- Pernyataan Penggunaan AI --------------
+
+Saya TIDAK munggunakan bantuan AI sama sekali dalam pengerjaan Tugas 2 ini. Saya hanya mengikuti langkah-langkah dari Tutorial 2.
+
+Proses saya mengerjakan Tugas ini:
+
+1. Saya lihat model apa yang ingin saya tambahkan (in this case, education, karena mengikuti yang saya tambahkan pada Tugas 1).
+
+2. Saya ikuti langkah-langkah pada Tutorial 2 dan menambahkan model education dengan field-field yang menurut saya cocok seperti school, dll.
+
+3. Saya kemudian menambahkan file baru di templates dengan nama education.html
+
+4. Selanjutnya, saya menambahkan rute url untuk education pada urls.py dan pada navbar di index.html
+
+5. Selanjutnya saya membuat unit testing dengan mengikuti template dari Tutorial 2 dan cek apakah sudah benar dengan menggunakan python manage.py test
+
+6. Jika sudah OK testnya, saya push ke github dan pws dan mengakhiri pengerjaan Tugas ini dengan menulis README.md ini.
