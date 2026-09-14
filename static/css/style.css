@@ -434,7 +434,7 @@ h1, h2, h3, .brand, .nav-content, .section-title {
 }
 
 .section-kicker {
-    color: var(--accent-dark);
+    color: var(--dark-amethyst);
     font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: 0.08em;
@@ -460,7 +460,7 @@ h1, h2, h3, .brand, .nav-content, .section-title {
 }
 
 .experience-category {
-    color: var(--accent-dark);
+    color: var(--dark-amethyst);
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -490,7 +490,7 @@ h1, h2, h3, .brand, .nav-content, .section-title {
 }
 
 .section-kicker {
-    color: var(--accent-dark);
+    color: var(--dark-amethyst);
     font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: 0.08em;
@@ -516,7 +516,7 @@ h1, h2, h3, .brand, .nav-content, .section-title {
 }
 
 .education-category {
-    color: var(--accent-dark);
+    color: var(--dark-amethyst);
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -536,4 +536,67 @@ h1, h2, h3, .brand, .nav-content, .section-title {
     margin-top: 1rem;
     font-size: 0.85rem;
     font-weight: 600;
+}
+
+/* Forms */
+.education-form,
+.experience-form {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 700;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.7rem;
+    border: 1px solid var(--bright-lavender);
+    border-radius: var(--radius);
+    font: inherit;
+    transition:
+        border-color 0.2s ease,
+        outline-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: 2px solid var(--blue-violet);
+    border-color: var(--bright-lavender);
+}
+
+.form-error {
+    color: #b42318;
+    font-size: 0.85rem;
+    margin-top: 0.35rem;
+}
+
+.button {
+    display: inline-block;
+    height: fit-content;
+    border: 0;
+    border-radius: var(--radius);
+    padding: 0.65rem 1rem;
+    background: var(--bright-lavender);
+    color: white;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.button-secondary {
+    background: var(--carbon-black);
 }

@@ -17,7 +17,7 @@ class Experience(models.Model):
     description = models.TextField()
     category = models.CharField(max_length=20, choices=EXPERIENCE_CHOICES, default='full-time')
     thumbnail = models.URLField(blank=True, null=True)
-    started_at = models.DateTimeField(auto_now_add=True)
+    started_at = models.DateTimeField(blank=True, null=True)
     ended_at = models.DateTimeField(blank=True, null=True)
     def __str__(self):
         return self.title
@@ -39,7 +39,7 @@ class Education(models.Model):
     school = models.CharField(max_length=255, default='Unknown')
     category = models.CharField(max_length=20, choices=EDUCATION_LEVELS, default='full-time')
     thumbnail = models.URLField(blank=True, null=True)
-    started_at = models.DateTimeField(auto_now_add=True)
+    started_at = models.DateTimeField(blank=True, null=True)
     ended_at = models.DateTimeField(blank=True, null=True)
     def __str__(self):
         return self.title

@@ -1,6 +1,12 @@
 from django.shortcuts import render
+from django.contrib import messages
+from django.core import serializers
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from django.utils import timezone
 
 from main.models import Experience, Education
+from main.forms import ExperienceForm, EducationForm
 
 
 def show_main(request):
@@ -33,3 +39,41 @@ def show_education(request):
         "education_list": Education.objects.all(),
     }
     return render(request, "education.html", context)
+
+def create_education(request):
+    form = EducationForm(request.POST or None)
+
+    if request.method == "POST" and form.is_valid():
+        education_item = form.save(commit=False)
+
+        if not education_item.started_at:
+            education_item.started_at = timezone.now()
+        
+        education_item.save()
+        messages.success(request, "New education added!")
+        return redirect("main:show_education")
+
+    context = {
+        "name": "Celine",
+        "form": form,
+    }
+    return render(request, "educations_form.html", context)
+
+def create_experience(request):
+    form = ExperienceForm(request.POST or None)
+
+    if request.method == "POST" and form.is_valid():
+        experience_item = form.save(commit=False)
+
+        if not experience_item.started_at:
+            experience_item.started_at = timezone.now()
+        
+        experience_item.save()
+        messages.success(request, "New experience added!")
+        return redirect("main:show_experience")
+
+    context = {
+        "name": "Celine",
+        "form": form,
+    }
+    return render(request, "experiences_form.html", context)
