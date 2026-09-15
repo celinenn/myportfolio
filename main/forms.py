@@ -1,4 +1,4 @@
-from django.forms import ModelForm, TextInput, Textarea, URLInput, DateTimeInput, forms
+from django.forms import ModelForm, TextInput, Textarea, URLInput, DateTimeInput, ChoiceField, Select
 
 from main.models import Education, Experience
 
@@ -36,9 +36,9 @@ class EducationForm(ModelForm):
                     "maxlength": 255,
                 }
             ),
-            "category": forms.ChoiceField(
+            "category": ChoiceField(
                 choices=Education.EDUCATION_LEVELS,
-                widget=forms.Select,
+                widget=Select,
             ),
             "thumbnail": URLInput(
                 attrs={
@@ -91,9 +91,9 @@ class ExperienceForm(ModelForm):
                     "rows": 3,
                 }
             ),
-            "category": forms.ChoiceField(
+            "category": ChoiceField(
                 choices=Experience.EXPERIENCE_CHOICES,
-                widget=forms.Select,
+                widget=Select,
             ),
             "thumbnail": URLInput(
                 attrs={
