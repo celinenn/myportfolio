@@ -36,10 +36,6 @@ class EducationForm(ModelForm):
                     "maxlength": 255,
                 }
             ),
-            "category": ChoiceField(
-                choices=Education.EDUCATION_LEVELS,
-                widget=Select,
-            ),
             "thumbnail": URLInput(
                 attrs={
                     "placeholder": "https://drive.google.com/file/d/1br4lWOeHx40XD4zJv7dQsIh9kOK8wQqD/view?usp=sharing",
@@ -90,10 +86,6 @@ class ExperienceForm(ModelForm):
                     "placeholder": "Describe Your Experience",
                     "rows": 3,
                 }
-            ),
-            "category": ChoiceField(
-                choices=Experience.EXPERIENCE_CHOICES,
-                widget=Select,
             ),
             "thumbnail": URLInput(
                 attrs={
