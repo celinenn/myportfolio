@@ -759,7 +759,7 @@ h1, h2, h3, .brand, .nav-content, .section-title {
     z-index: 1;
     width: min(100%, 480px);
     padding: 1.5rem;
-    background: var(--paper);
+    background: var(--lavender-mist);
     border: 1px solid var(--line);
     border-radius: var(--radius);
     box-shadow: 0 1rem 3rem rgba(28, 25, 23, 0.22);
@@ -770,7 +770,7 @@ h1, h2, h3, .brand, .nav-content, .section-title {
     z-index: 1;
     width: min(100%, 480px);
     padding: 1.5rem;
-    background: var(--paper);
+    background: var(--lavender-mist);
     border: 1px solid var(--line);
     border-radius: var(--radius);
     box-shadow: 0 1rem 3rem rgba(28, 25, 23, 0.22);
