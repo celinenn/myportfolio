@@ -37,6 +37,7 @@ class EducationForm(ModelForm):
                 }
             ),
             "category": ChoiceField(
+                attrs={},
                 choices=Education.EDUCATION_LEVELS,
                 widget=Select,
             ),
@@ -92,6 +93,7 @@ class ExperienceForm(ModelForm):
                 }
             ),
             "category": ChoiceField(
+                attrs={},
                 choices=Experience.EXPERIENCE_CHOICES,
                 widget=Select,
             ),
