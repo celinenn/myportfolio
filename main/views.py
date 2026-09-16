@@ -77,3 +77,23 @@ def create_experience(request):
         "form": form,
     }
     return render(request, "experiences_form.html", context)
+
+def get_experiences_json(request):
+    title_query = request.GET.get("title", "").strip()
+    experiences = Experience.objects.all()
+
+    if title_query:
+        experiences = experiences.filter(title__icontains=title_query)
+
+    experiences_json = serializers.serialize("json", experiences)
+    return HttpResponse(experiences_json, content_type="application/json")
+
+def get_educations_json(request):
+    title_query = request.GET.get("title", "").strip()
+    educations = Education.objects.all()
+
+    if title_query:
+        educations = educations.filter(title__icontains=title_query)
+
+    educations_json = serializers.serialize("json", educations)
+    return HttpResponse(educations_json, content_type="application/json")
