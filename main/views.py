@@ -26,17 +26,37 @@ def show_main(request):
 
 
 def show_experience(request):
+    json_response = get_experiences_json(request)
+
+    experiences = serializers.deserialize(
+        "json",
+        json_response.content.decode("utf-8"),
+    )
+    experiences = [experience.object for experience in experiences]
+    title_query = request.GET.get("title", "").strip()
+
     context = {
         "name": "Celine",
-        "experience_list": Experience.objects.all(),
+        "experience_list": experiences,
+        "title_query": title_query,
     }
     return render(request, "experience.html", context)
 
 
 def show_education(request):
+    json_response = get_educations_json(request)
+
+    educations = serializers.deserialize(
+        "json",
+        json_response.content.decode("utf-8"),
+    )
+    educations = [education.object for education in educations]
+    title_query = request.GET.get("title", "").strip()
+
     context = {
         "name": "Celine",
-        "education_list": Education.objects.all(),
+        "education_list": educations,
+        "title_query": title_query,
     }
     return render(request, "education.html", context)
 
@@ -97,40 +117,6 @@ def get_educations_json(request):
 
     educations_json = serializers.serialize("json", educations)
     return HttpResponse(educations_json, content_type="application/json")
-
-def show_experiences(request):
-    json_response = get_experiences_json(request)
-
-    experiences = serializers.deserialize(
-        "json",
-        json_response.content.decode("utf-8"),
-    )
-    experiences = [experience.object for experience in experiences]
-    title_query = request.GET.get("title", "").strip()
-
-    context = {
-        "name": "Burhan",
-        "experience_list": experiences,
-        "title_query": title_query,
-    }
-    return render(request, "experience.html", context)
-
-def show_educations(request):
-    json_response = get_educations_json(request)
-
-    educations = serializers.deserialize(
-        "json",
-        json_response.content.decode("utf-8"),
-    )
-    educations = [education.object for education in educations]
-    title_query = request.GET.get("title", "").strip()
-
-    context = {
-        "name": "Burhan",
-        "education_list": educations,
-        "title_query": title_query,
-    }
-    return render(request, "education.html", context)
 
 def delete_experience(request, experience_id):
     experience = get_object_or_404(Experience, pk=experience_id)
