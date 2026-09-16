@@ -37,9 +37,8 @@ class EducationForm(ModelForm):
                 }
             ),
             "category": ChoiceField(
-                attrs={},
                 choices=Education.EDUCATION_LEVELS,
-                widget=Select,
+                widget=Select(attrs={"class": "form-control"}),
             ),
             "thumbnail": URLInput(
                 attrs={
@@ -93,9 +92,8 @@ class ExperienceForm(ModelForm):
                 }
             ),
             "category": ChoiceField(
-                attrs={},
                 choices=Experience.EXPERIENCE_CHOICES,
-                widget=Select,
+                widget=Select(attrs={"class": "form-control"}),
             ),
             "thumbnail": URLInput(
                 attrs={
