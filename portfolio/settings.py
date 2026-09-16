@@ -154,4 +154,4 @@ MAILERS = {
     },
 }
 
-CSRF_TRUSTED_ORIGINS = ["https://celine-nafisa-myportfolio.pws.cs.ui.ac.id/"]
+CSRF_TRUSTED_ORIGINS = ["https://celine-nafisa-myportfolio.pws.cs.ui.ac.id"]
