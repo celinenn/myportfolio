@@ -124,9 +124,9 @@ def delete_experience(request, experience_id):
     if request.method == "POST":
         experience.delete()
         messages.success(request, "Experience deleted successfully!")
-        return redirect("main:show_experiences")
+        return redirect("main:show_experience")
 
-    return redirect("main:show_experiences")
+    return redirect("main:show_experience")
 
 def delete_education(request, education_id):
     education = get_object_or_404(Education, pk=education_id)
@@ -134,6 +134,6 @@ def delete_education(request, education_id):
     if request.method == "POST":
         education.delete()
         messages.success(request, "Education deleted successfully!")
-        return redirect("main:show_educations")
+        return redirect("main:show_education")
 
-    return redirect("main:show_educations")
+    return redirect("main:show_education")
