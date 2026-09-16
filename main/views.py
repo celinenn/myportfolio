@@ -97,3 +97,57 @@ def get_educations_json(request):
 
     educations_json = serializers.serialize("json", educations)
     return HttpResponse(educations_json, content_type="application/json")
+
+def show_experiences(request):
+    json_response = get_experiences_json(request)
+
+    experiences = serializers.deserialize(
+        "json",
+        json_response.content.decode("utf-8"),
+    )
+    experiences = [experience.object for experience in experiences]
+    title_query = request.GET.get("title", "").strip()
+
+    context = {
+        "name": "Burhan",
+        "experience_list": experiences,
+        "title_query": title_query,
+    }
+    return render(request, "experience.html", context)
+
+def show_educations(request):
+    json_response = get_educations_json(request)
+
+    educations = serializers.deserialize(
+        "json",
+        json_response.content.decode("utf-8"),
+    )
+    educations = [education.object for education in educations]
+    title_query = request.GET.get("title", "").strip()
+
+    context = {
+        "name": "Burhan",
+        "education_list": educations,
+        "title_query": title_query,
+    }
+    return render(request, "education.html", context)
+
+def delete_experience(request, experience_id):
+    experience = get_object_or_404(Experience, pk=experience_id)
+
+    if request.method == "POST":
+        experience.delete()
+        messages.success(request, "Experience deleted successfully!")
+        return redirect("main:show_experiences")
+
+    return redirect("main:show_experiences")
+
+def delete_education(request, education_id):
+    education = get_object_or_404(Education, pk=education_id)
+
+    if request.method == "POST":
+        education.delete()
+        messages.success(request, "Education deleted successfully!")
+        return redirect("main:show_educations")
+
+    return redirect("main:show_educations")
