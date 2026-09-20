@@ -49,34 +49,34 @@ class Education(models.Model):
     def is_ongoing(self):
         return self.ended_at is None
 
-    class Skill(models.Model):
-        SKILL_TYPE = [
-            ('language', 'Language'),
-            ('soft-skill', 'Soft-Skill'),
-            ('hard-skill', 'Hard-Skill')
-        ]
+class Skill(models.Model):
+    SKILL_TYPE = [
+        ('language', 'Language'),
+        ('soft-skill', 'Soft-Skill'),
+        ('hard-skill', 'Hard-Skill')
+    ]
 
-        LANGUAGE_LEVEL = [
-            ('native', 'Native'),
-            ('first-language', 'First Language'),
-            ('fluent', 'Fluent'),
-            ('intermediate', 'Intermediate'),
-            ('beginner', 'Beginner'),
-        ]
-        
-        id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-        title = models.CharField(max_length=255)
-        type = models.CharField(max_length=20, choices=SKILL_TYPE)
-        language_level = models.CharField(max_length=30, choices=LANGUAGE_LEVEL, null=True)
-        level = models.IntegerField(
-            validators=[MinValueValidator(1), MaxValueValidator(10)], 
-                blank=True, 
-                null=True
-            )
-        
-        def __str__(self):
-            return self.title
-        
-        @property
-        def is_ongoing(self):
-            return self.ended_at is None
+    LANGUAGE_LEVEL = [
+        ('native', 'Native'),
+        ('first-language', 'First Language'),
+        ('fluent', 'Fluent'),
+        ('intermediate', 'Intermediate'),
+        ('beginner', 'Beginner'),
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    title = models.CharField(max_length=255)
+    type = models.CharField(max_length=20, choices=SKILL_TYPE)
+    language_level = models.CharField(max_length=30, choices=LANGUAGE_LEVEL, null=True)
+    level = models.IntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(10)], 
+            blank=True, 
+            null=True
+        )
+    
+    def __str__(self):
+        return self.title
+    
+    @property
+    def is_ongoing(self):
+        return self.ended_at is None
