@@ -16,7 +16,7 @@ class Experience(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=255)
     description = models.TextField()
-    category = models.CharField(max_length=20, choices=EXPERIENCE_CHOICES)
+    category = models.CharField(max_length=20, choices=EXPERIENCE_CHOICES, default='full-time')
     thumbnail = models.URLField(blank=True, null=True)
     started_at = models.DateTimeField(blank=True, null=True)
     ended_at = models.DateTimeField(blank=True, null=True)
@@ -38,7 +38,7 @@ class Education(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=255)
     school = models.CharField(max_length=255, default='Unknown')
-    category = models.CharField(max_length=20, choices=EDUCATION_LEVELS)
+    category = models.CharField(max_length=20, choices=EDUCATION_LEVELS, default='bachelors')
     thumbnail = models.URLField(blank=True, null=True)
     started_at = models.DateTimeField(blank=True, null=True)
     ended_at = models.DateTimeField(blank=True, null=True)
@@ -56,23 +56,17 @@ class Skill(models.Model):
         ('hard-skill', 'Hard-Skill')
     ]
 
-    LANGUAGE_LEVEL = [
-        ('native', 'Native'),
-        ('first-language', 'First Language'),
-        ('fluent', 'Fluent'),
-        ('intermediate', 'Intermediate'),
+    PROFICIENCY_CHOICES = [
         ('beginner', 'Beginner'),
+        ('intermediate', 'Intermediate'),
+        ('advanced', 'Advanced'),
+        ('expert', 'Expert / Native'),
     ]
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=255)
     type = models.CharField(max_length=20, choices=SKILL_TYPE)
-    language_level = models.CharField(max_length=30, choices=LANGUAGE_LEVEL, null=True)
-    level = models.IntegerField(
-        validators=[MinValueValidator(1), MaxValueValidator(10)], 
-            blank=True, 
-            null=True
-        )
+    proficiency = models.CharField(max_length=20, choices=PROFICIENCY_CHOICES, default='expert')
     
     def __str__(self):
         return self.title

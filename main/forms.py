@@ -44,12 +44,12 @@ class EducationForm(ModelForm):
             "started_at": DateTimeInput(
                 attrs={
                     "type": "datetime-local",
-                }, format='%Y-%m-%dT%H:%M'
+                }, format='%Y-%m-%d'
             ),
             "ended_at": DateTimeInput(
                 attrs={
                     "type": "datetime-local",
-                }, format='%Y-%m-%dT%H:%M'
+                }, format='%Y-%m-%d'
             ),
         }
     
@@ -95,12 +95,12 @@ class ExperienceForm(ModelForm):
             "started_at": DateTimeInput(
                 attrs={
                     "type": "datetime-local",
-                }, format='%Y-%m-%dT%H:%M'
+                }, format='%Y-%m-%d'
             ),
             "ended_at": DateTimeInput(
                 attrs={
                     "type": "datetime-local",
-                }, format='%Y-%m-%dT%H:%M'
+                }, format='%Y-%m-%d'
             ),
         }
 
@@ -110,15 +110,13 @@ class SkillForm(ModelForm):
         fields = [
             "title",
             "type",
-            "language_level",
-            "level",
+            "proficiency",
         ]
 
         labels = {
             "title": "Skill Title",
             "type": "Skill Type",
-            "language_level": "Language Level (If Applicable)",
-            "level": "Skill Level (1-10)",
+            "proficiency": "Proficiency Level",
         }
 
         widgets = {
@@ -126,13 +124,6 @@ class SkillForm(ModelForm):
                 attrs={
                     "placeholder": "e.g. Python or Indonesian",
                     "maxlength": 255,
-                }
-            ),
-            "level": NumberInput(
-                attrs={
-                    "min": 1,
-                    "max": 10,
-                    "placeholder": "1-10",
                 }
             ),
         }
