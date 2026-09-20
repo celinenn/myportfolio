@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>Skills - {{ name }}</title>
+{% endblock meta %}
+
+{% block content %}
+    <main>
+        <section class="experience-section" id="skills">
+            <div class="container">
+                <p class="section-kicker">My expertise & proficiencies</p>
+                <div class="form-header">
+                    <h1>Skills</h1>
+                    <a href="{% url 'main:create_skill' %}"
+                       class="button form-add-button">
+                        <span aria-hidden="true">+</span>
+                        Add Skill
+                    </a>
+                </div>
+                <form method="get"
+                      action="{% url 'main:show_skill' %}"
+                      class="form-search">
+                    <input type="search"
+                           name="title"
+                           value="{{ title_query }}"
+                           placeholder="Search based on skill name"
+                           class="form-search__input"
+                           aria-label="Search based on skill name">
+                    <button type="submit" class="button">Search</button>
+                </form>
+                <div class="experience-grid">
+                    {% for skill in skill_list %}
+                        <article class="experience-card">
+                            <span class="experience-category">
+                                {{ skill.get_category_display }}
+                            </span>
+                            <h2>{{ skill.title }}</h2>
+                            <p class="experience-status">Proficiency: {{ skill.get_proficiency_display }}</p>
+                            <div class="form-card-actions">
+                                <div class="form-actions">
+                                    {% include "components/skill_delete_modal.html" with skill=skill %}
+                                </div>
+                            </div>
+                        </article>
+                    {% empty %}
+                        <p class="empty-state">
+                            No skills have been added yet.
+                        </p>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock content %}
