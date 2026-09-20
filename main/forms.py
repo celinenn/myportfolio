@@ -1,6 +1,6 @@
-from django.forms import ModelForm, TextInput, Textarea, URLInput, DateTimeInput, ChoiceField, Select
+from django.forms import ModelForm, TextInput, Textarea, URLInput, DateTimeInput, NumberInput
 
-from main.models import Education, Experience
+from main.models import *
 
 class EducationForm(ModelForm):
     class Meta:
@@ -101,5 +101,38 @@ class ExperienceForm(ModelForm):
                 attrs={
                     "type": "datetime-local",
                 }, format='%Y-%m-%dT%H:%M'
+            ),
+        }
+
+class SkillForm(ModelForm):
+    class Meta:
+        model = Skill
+        fields = [
+            "title",
+            "type",
+            "language_level",
+            "level",
+        ]
+
+        labels = {
+            "title": "Skill Title",
+            "type": "Skill Type",
+            "language_level": "Language Level (If Applicable)",
+            "level": "Skill Level (1-10)",
+        }
+
+        widgets = {
+            "title": TextInput(
+                attrs={
+                    "placeholder": "e.g. Python or Indonesian",
+                    "maxlength": 255,
+                }
+            ),
+            "level": NumberInput(
+                attrs={
+                    "min": 1,
+                    "max": 10,
+                    "placeholder": "1-10",
+                }
             ),
         }
