@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
 
-from main.models import Experience, Education
+from main.models import *
 
 
 class MainTest(TestCase):
@@ -17,6 +17,12 @@ class MainTest(TestCase):
             title="Computer Science Bachelors",
             school="Universitas Indonesia",
             category="bachelors"
+        )
+
+        self.skill = Skill.objects.create(
+            title="Python",
+            type="hard-skill",
+            proficiency="advanced"
         )
 
     def test_main_experience_url_is_accessible(self):
@@ -44,6 +50,11 @@ class MainTest(TestCase):
         self.assertEqual(self.education.category, "bachelors")
         self.assertTrue(self.education.is_ongoing)
 
+    def test_skill_model(self):
+        self.assertEqual(str(self.skill), "Python")
+        self.assertEqual(self.skill.type, "hard-skill")
+        self.assertEqual(self.skill.proficiency, "advanced")
+
     def test_experience_page(self):
         response = self.client.get(reverse("main:show_experience"))
 
@@ -66,6 +77,16 @@ class MainTest(TestCase):
         self.assertContains(response, "Ongoing")
         self.assertContains(response, f'href="{reverse("main:show_main")}"')
 
+    def test_skill_page(self):
+        response = self.client.get(reverse("main:show_skill"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "skill.html")
+        self.assertContains(response, self.skill.title)
+        self.assertContains(response, "Hard-Skill")
+        self.assertContains(response, "Advanced")
+        self.assertContains(response, f'href="{reverse("main:show_main")}"')
+
     def test_empty_experience_page(self):
         Experience.objects.all().delete()
         response = self.client.get(reverse("main:show_experience"))
@@ -77,6 +98,12 @@ class MainTest(TestCase):
         response = self.client.get(reverse("main:show_education"))
 
         self.assertContains(response, "No education has been added yet.")
+
+    def test_empty_skill_page(self):
+        Skill.objects.all().delete()
+        response = self.client.get(reverse("main:show_skill"))
+
+        self.assertContains(response, "No skills have been added yet.")
 
     def test_completed_experience(self):
         self.experience.ended_at = timezone.now()
@@ -95,3 +122,12 @@ class MainTest(TestCase):
         self.assertFalse(self.education.is_ongoing)
         self.assertContains(response, "Finished")
         self.assertNotContains(response, "Ongoing")
+
+    def test_json_endpoints(self):
+        response_exp = self.client.get(reverse("main:get_experiences_json"))
+        response_edu = self.client.get(reverse("main:get_educations_json"))
+        response_skill = self.client.get(reverse("main:get_skills_json"))
+
+        self.assertEqual(response_exp.status_code, 200)
+        self.assertEqual(response_edu.status_code, 200)
+        self.assertEqual(response_skill.status_code, 200)

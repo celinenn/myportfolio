@@ -32,7 +32,7 @@
                     {% for skill in skill_list %}
                         <article class="experience-card">
                             <span class="experience-category">
-                                {{ skill.get_category_display }}
+                                {{ skill.get_type_display }}
                             </span>
                             <h2>{{ skill.title }}</h2>
                             <p class="experience-status">Proficiency: {{ skill.get_proficiency_display }}</p>
