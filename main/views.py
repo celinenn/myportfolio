@@ -5,8 +5,8 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 
-from main.models import Experience, Education
-from main.forms import ExperienceForm, EducationForm
+from main.models import *
+from main.forms import *
 
 
 def show_main(request):
@@ -60,6 +60,23 @@ def show_education(request):
     }
     return render(request, "education.html", context)
 
+def show_skill(request):
+    json_response = get_skills_json(request)
+
+    skills = serializers.deserialize(
+        "json",
+        json_response.content.decode("utf-8"),
+    )
+    skills = [skill.object for skill in skills]
+    title_query = request.GET.get("title", "").strip()
+
+    context = {
+        "name": "Celine",
+        "skill_list": skills,
+        "title_query": title_query,
+    }
+    return render(request, "skill.html", context)
+
 def create_education(request):
     form = EducationForm(request.POST or None)
 
@@ -98,6 +115,21 @@ def create_experience(request):
     }
     return render(request, "experiences_form.html", context)
 
+def create_skill(request):
+    form = SkillForm(request.POST or None)
+
+    if request.method == "POST" and form.is_valid():
+        skill_item = form.save(commit=False)
+        skill_item.save()
+        messages.success(request, "New skill added!")
+        return redirect("main:show_skill")
+
+    context = {
+        "name": "Celine",
+        "form": form,
+    }
+    return render(request, "skills_form.html", context)
+
 def get_experiences_json(request):
     title_query = request.GET.get("title", "").strip()
     experiences = Experience.objects.all()
@@ -118,6 +150,16 @@ def get_educations_json(request):
     educations_json = serializers.serialize("json", educations)
     return HttpResponse(educations_json, content_type="application/json")
 
+def get_skills_json(request):
+    title_query = request.GET.get("title", "").strip()
+    skills = Skill.objects.all()
+
+    if title_query:
+        skills = skills.filter(title__icontains=title_query)
+
+    skills_json = serializers.serialize("json", skills)
+    return HttpResponse(skills_json, content_type="application/json")
+
 def delete_experience(request, experience_id):
     experience = get_object_or_404(Experience, pk=experience_id)
 
@@ -137,3 +179,13 @@ def delete_education(request, education_id):
         return redirect("main:show_education")
 
     return redirect("main:show_education")
+
+def delete_skill(request, skill_id):
+    skill = get_object_or_404(Skill, pk=skill_id)
+
+    if request.method == "POST":
+        skill.delete()
+        messages.success(request, "Skill deleted successfully!")
+        return redirect("main:show_skill")
+
+    return redirect("main:show_skill")
