@@ -65,3 +65,34 @@ Proses saya mengerjakan Tugas ini:
 5. Selanjutnya saya membuat unit testing dengan mengikuti template dari Tutorial 2 dan cek apakah sudah benar dengan menggunakan python manage.py test
 
 6. Jika sudah OK testnya, saya push ke github dan pws dan mengakhiri pengerjaan Tugas ini dengan menulis README.md ini.
+
+
+
+============== Pertanyaan Relatif ==============
+
+### Tugas 3
+
+1. Dengan menggunakan ModelForm, django secara otomatis menghasilkan field form berdasarkan struktur Model pada Django kita, sehingga kita tidak perlu menulis ulang tag input satu persatu pada file html. Form ini juga memudahkan proses validasi data dari input user dan proses penyimpanannya ke dalam database (.save()) tanpa perlu mengambil dan memetakan satu persatu request.POST secara manual. Penambahan {% csrf_token %} adalah untuk mencegah adanya pengiriman data dari pihak luar untuk mengecoh current usernya. Basically, saat user menekan tombol submit (POST request), Django akan memverifikasi apakah token tersebut cocok dengan sesi user yang sedang aktif.
+
+2. Selain karena sintaks JSON yang lebih bersih dan rapih, JSON berbasis sintaks objek JavaScript, jadi dapat langsung diubah menjadi objek JS secara instan di sisi frontend tanpa memerlukan library atau parser tambahan seperti XML.
+
+3. Ketika user mengakses API, Django akan memanggil fungsi view terkait seperti get_experiences_json. View tersebut akan mengambil query data dari database menggunakan QuerySet model Django yang akan kemudian melewati proses serialization untuk mengubah objek Python/Django menjadi JSON. Terakhir, view akan mengembalikan data tersebut dalam bentuk objek HttpResponse dengan content_type="application/json" agar browser tahu bahwa data yang dikirim adalah format JSON.
+
+
+-------------- Pernyataan Penggunaan AI --------------
+
+Saya TIDAK munggunakan bantuan AI sama sekali dalam pengerjaan Tugas 3 ini. Saya hanya mengikuti langkah-langkah dari Tutorial 3.
+
+Proses saya mengerjakan Tugas ini:
+
+1. Saya sebenarnya sudah menambahkan form untuk kedua model yang saya awalnya miliki (experience dan education) pada saat mengerjakan Tutorial 3. Jadi pada Tugas 3 ini saya menambahkan model baru, yakni Skill agar bisa meluaskan portfolio saya dan menambahkan form baru lagi dan mengikuti langkah-langkah Tugas 3 ini.
+
+2. Saya ikuti langkah-langkah pada Tutorial 3 dan menambahkan model skill dengan field-field yang menurut saya cocok, dan juga formnya.
+
+3. Saya kemudian menambahkan file-file html yang diperlukan sesuah Tutorial 3 seperti skill.html, skills_form.html, dan skill_delete_modal.html dalam components.
+
+4. Selanjutnya, saya menambahkan rute url untuk skill pada urls.py dan pada navbar di index.html
+
+5. Selanjutnya saya membuat unit testing dengan mengikuti template dari Tutorial 2 dan cek apakah sudah benar dengan menggunakan python manage.py test
+
+6. Jika sudah OK testnya, saya push ke github dan pws dan mengakhiri pengerjaan Tugas ini dengan menulis README.md ini.
