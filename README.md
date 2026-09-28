@@ -93,6 +93,24 @@ Proses saya mengerjakan Tugas ini:
 
 4. Selanjutnya, saya menambahkan rute url untuk skill pada urls.py dan pada navbar di index.html
 
-5. Selanjutnya saya membuat unit testing dengan mengikuti template dari Tutorial 2 dan cek apakah sudah benar dengan menggunakan python manage.py test
+5. Selanjutnya saya membuat unit testing dengan mengikuti template dari Tutorial 3 dan cek apakah sudah benar dengan menggunakan python manage.py test
 
 6. Jika sudah OK testnya, saya push ke github dan pws dan mengakhiri pengerjaan Tugas ini dengan menulis README.md ini.
+
+
+
+============== Pertanyaan Relatif ==============
+
+### Tugas 4
+
+-------------- Pernyataan Penggunaan AI --------------
+
+Saya TIDAK munggunakan bantuan AI sama sekali dalam pengerjaan Tugas 4 ini. Saya hanya mengikuti langkah-langkah dari Tutorial 4.
+
+Proses saya mengerjakan Tugas ini:
+
+1. Saya melihat langkah-langkah pada Tutorial 4 untuk menambahkan authentification untuk experience dan skill pada portofolio saya
+
+2. Selanjutnya saya mengecek apakah servernya tetap bisa run dengan python manage.py runserver, jika sudah OK saya lanjut push ke github
+
+3. Saya akhiri pengerjaan Tugas 4 ini dengan mengisi README.md ini
