@@ -11,11 +11,13 @@
                 <p class="section-kicker">My expertise & proficiencies</p>
                 <div class="form-header">
                     <h1>Skills</h1>
-                    <a href="{% url 'main:create_skill' %}"
-                       class="button form-add-button">
-                        <span aria-hidden="true">+</span>
-                        Add Skill
-                    </a>
+                    {% if user.is_superuser %}
+                        <a href="{% url 'main:create_skill' %}"
+                        class="button form-add-button">
+                            <span aria-hidden="true">+</span>
+                            Add Skill
+                        </a>
+                    {% endif %}
                 </div>
                 <form method="get"
                       action="{% url 'main:show_skill' %}"
@@ -38,7 +40,10 @@
                             <p class="experience-status">Proficiency: {{ skill.get_proficiency_display }}</p>
                             <div class="form-card-actions">
                                 <div class="form-actions">
-                                    {% include "components/skill_delete_modal.html" with skill=skill %}
+                                    {% inlude "components/skill_star.html" with skill=skill %}
+                                    {% if user.is_superuser %}
+                                        {% include "components/skill_delete_modal.html" with skill=skill %}
+                                    {% endif %}
                                 </div>
                             </div>
                         </article>

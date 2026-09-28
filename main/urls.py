@@ -22,4 +22,6 @@ urlpatterns = [
     path("login/", login_user, name="login"),
     path("logout/", logout_user, name="logout"),
     path("education/<uuid:education_id>/star/", toggle_star_education, name="toggle_star_education"),
+    path("experience/<uuid:experience_id>/star/", toggle_star_experience, name="toggle_star_experience"),
+    path("skill/<uuid:skill_id>/star/", toggle_star_skill, name="toggle_star_skill"),
 ]

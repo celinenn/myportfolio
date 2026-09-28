@@ -107,7 +107,11 @@ def create_education(request):
     }
     return render(request, "educations_form.html", context)
 
+@login_required(login_url="/login/")
 def create_experience(request):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+    
     form = ExperienceForm(request.POST or None)
 
     if request.method == "POST" and form.is_valid():
@@ -126,7 +130,11 @@ def create_experience(request):
     }
     return render(request, "experiences_form.html", context)
 
+@login_required(login_url="/login/")
 def create_skill(request):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+    
     form = SkillForm(request.POST or None)
 
     if request.method == "POST" and form.is_valid():
@@ -144,6 +152,10 @@ def create_skill(request):
 def get_experiences_json(request):
     title_query = request.GET.get("title", "").strip()
     experiences = Experience.objects.all()
+
+    experiences_json = serializers.serialize(
+        "json", experiences, use_natural_foreign_keys=True
+    )
 
     if title_query:
         experiences = experiences.filter(title__icontains=title_query)
@@ -168,6 +180,10 @@ def get_educations_json(request):
 def get_skills_json(request):
     title_query = request.GET.get("title", "").strip()
     skills = Skill.objects.all()
+
+    skills_json = serializers.serialize(
+        "json", skills, use_natural_foreign_keys=True
+    )
 
     if title_query:
         skills = skills.filter(title__icontains=title_query)
@@ -242,7 +258,7 @@ def logout_user(request):
     return response
 
 @login_required(login_url="/login/")
-def toggle_star(request, education_id):
+def toggle_star_education(request, education_id):
     education = get_object_or_404(Education, pk=education_id)
 
     if request.method == "POST":
@@ -252,3 +268,26 @@ def toggle_star(request, education_id):
             education.starred_by.add(request.user)
 
     return redirect("main:show_educations")
+
+@login_required(login_url="/login/")
+def toggle_star_experience(request, experience_id):
+    experience = get_object_or_404(Experience, pk=experience_id)
+
+    if request.method == "POST":
+        if request.user in experience.starred_by.all():
+            experience.starred_by.remove(request.user)
+        else:
+            experience.starred_by.add(request.user)
+
+    return redirect("main:show_experiences")
+
+@login_required(login_url="/login/")
+def toggle_star_skill(request, skill_id):
+    skill = get_object_or_404(Skill, pk=skill_id)
+
+    if request.method == "POST":
+        skill.starred_by.remove(request.user)
+    else:
+        skill.starred_by.add(request.user)
+
+    return redirect("main:show_skills")
