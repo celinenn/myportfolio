@@ -11,11 +11,13 @@
                 <p class="section-kicker">My education so far</p>
                 <div class="form-header">
                     <h1>Educations</h1>
-                    <a href="{% url 'main:create_education' %}"
-                       class="button form-add-button">
-                        <span aria-hidden="true">+</span>
-                        Add Education
-                    </a>
+                    {% if user.is_superuser %}
+                        <a href="{% url 'main:create_education' %}"
+                        class="button form-add-button">
+                            <span aria-hidden="true">+</span>
+                            Add Education
+                        </a>
+                    {% endif %} 
                 </div>
                 <form method="get"
                       action="{% url 'main:show_education' %}"
@@ -54,7 +56,10 @@
                                     {% if education.education_url %}
                                         <a href="{{ education.education_url }}" class="button">See Education</a>
                                     {% endif %}
-                                    {% include "components/education_delete_modal.html" with education=education %}
+                                    {% include "components/project_star.html" with project=project %}
+                                    {% if user.is_superuser %}
+                                        {% include "components/education_delete_modal.html" with education=education %}
+                                    {% endif %}
                                 </div>
                             </div>
                         </article>

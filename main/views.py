@@ -1,15 +1,21 @@
 from django.shortcuts import render
 from django.contrib import messages
+from django.contrib.auth import login, logout
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.core import serializers
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
+import datetime
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 
 from main.models import *
 from main.forms import *
 
 
 def show_main(request):
+    last_login = request.COOKIES.get('last_login', 'No login session yet / Cookie not found')
     context = {
         "name": "Celine",
         "npm": "2506590201",
@@ -21,6 +27,7 @@ def show_main(request):
             "in completing my tasks, allowing me to finish them in time, and "
             "able to work in a team."
         ),
+        "last_login": last_login,
     }
     return render(request, "index.html", context)
 
@@ -77,7 +84,11 @@ def show_skill(request):
     }
     return render(request, "skill.html", context)
 
+@login_required(login_url="/login/")
 def create_education(request):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+
     form = EducationForm(request.POST or None)
 
     if request.method == "POST" and form.is_valid():
@@ -144,6 +155,10 @@ def get_educations_json(request):
     title_query = request.GET.get("title", "").strip()
     educations = Education.objects.all()
 
+    educations_json = serializers.serialize(
+            "json", educations, use_natural_foreign_keys=True
+        )
+
     if title_query:
         educations = educations.filter(title__icontains=title_query)
 
@@ -189,3 +204,51 @@ def delete_skill(request, skill_id):
         return redirect("main:show_skill")
 
     return redirect("main:show_skill")
+
+def register(request):
+    form = UserCreationForm(request.POST or None)
+
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, "Account successfully created. Please login.")
+        return redirect("main:login")
+
+    context = {
+        "name": "Celine",
+        "form": form,
+    }
+    return render(request, "register.html", context)
+
+def login_user(request):
+    form = AuthenticationForm(request, data=request.POST or None)
+
+    if request.method == "POST" and form.is_valid():
+        user = form.get_user()
+        login(request, user)
+        response = redirect("main:show_main")
+        response.set_cookie('last_login', datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+        return response
+
+    context = {
+        "name": "Celine",
+        "form": form,
+    }
+    return render(request, "login.html", context)
+
+def logout_user(request):
+    logout(request)
+    response = redirect("main:show_main")
+    response.delete_cookie('last_login')
+    return response
+
+@login_required(login_url="/login/")
+def toggle_star(request, education_id):
+    education = get_object_or_404(Education, pk=education_id)
+
+    if request.method == "POST":
+        if request.user in education.starred_by.all():
+            education.starred_by.remove(request.user)
+        else:
+            education.starred_by.add(request.user)
+
+    return redirect("main:show_educations")

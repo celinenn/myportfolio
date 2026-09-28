@@ -18,4 +18,8 @@ urlpatterns = [
     path("educations/<uuid:education_id>/delete/",delete_education,name="delete_education"),
     path("experiences/<uuid:experience_id>/delete/",delete_experience,name="delete_experience"),
     path("skills/<uuid:skill_id>/delete/", delete_skill, name="delete_skill"),
+    path("register/", register, name="register"),
+    path("login/", login_user, name="login"),
+    path("logout/", logout_user, name="logout"),
+    path("projects/<uuid:project_id>/star/", toggle_star, name="toggle_star"),
 ]
