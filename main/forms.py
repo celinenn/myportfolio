@@ -1,4 +1,6 @@
 from django.forms import ModelForm, TextInput, Textarea, URLInput, DateTimeInput, NumberInput
+from django.core.exceptions import ValidationError
+from django.utils.html import strip_tags
 
 from main.models import *
 
@@ -52,6 +54,18 @@ class EducationForm(ModelForm):
                 }, format='%Y-%m-%d'
             ),
         }
+
+    def clean_title(self):
+        title = strip_tags(self.cleaned_data["title"]).strip()
+        if not title:
+            raise ValidationError("Education name cannot just be filled with HTML tags.")
+        return title
+
+    def clean_school(self):
+        return strip_tags(self.cleaned_data["school"]).strip()
+
+    def clean_category(self):
+        return strip_tags(self.cleaned_data["category"]).strip()
     
 class ExperienceForm(ModelForm):
     class Meta:
@@ -104,6 +118,18 @@ class ExperienceForm(ModelForm):
             ),
         }
 
+    def clean_title(self):
+        title = strip_tags(self.cleaned_data["title"]).strip()
+        if not title:
+            raise ValidationError("Experience name cannot just be filled with HTML tags.")
+        return title
+
+    def clean_description(self):
+        return strip_tags(self.cleaned_data["description"]).strip()
+
+    def clean_category(self):
+        return strip_tags(self.cleaned_data["category"]).strip()
+
 class SkillForm(ModelForm):
     class Meta:
         model = Skill
@@ -127,3 +153,15 @@ class SkillForm(ModelForm):
                 }
             ),
         }
+        
+    def clean_title(self):
+        title = strip_tags(self.cleaned_data["title"]).strip()
+        if not title:
+            raise ValidationError("Skill name cannot just be filled with HTML tags.")
+        return title
+
+    def clean_type(self):
+        return strip_tags(self.cleaned_data["type"]).strip()
+
+    def clean_proficiency(self):
+        return strip_tags(self.cleaned_data["proficiency"]).strip()

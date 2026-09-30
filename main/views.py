@@ -9,6 +9,7 @@ from django.utils import timezone
 import datetime
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
+from django.views.decorators.http import require_POST
 
 from main.models import *
 from main.forms import *
@@ -38,6 +39,7 @@ def show_experience(request):
     context = {
         "name": "Celine",
         "title_query": title_query,
+        "form": ExperienceForm(),
     }
     return render(request, "experience.html", context)
 
@@ -48,6 +50,7 @@ def show_education(request):
     context = {
         "name": "Celine",
         "title_query": title_query,
+        "form": EducationForm(),
     }
     return render(request, "education.html", context)
 
@@ -57,6 +60,7 @@ def show_skill(request):
     context = {
         "name": "Celine",
         "title_query": title_query,
+        "form": SkillForm(),
     }
     return render(request, "skill.html", context)
 
@@ -288,7 +292,7 @@ def toggle_star_education(request, education_id):
         else:
             education.starred_by.add(request.user)
 
-    return redirect("main:show_educations")
+    return redirect("main:show_education")
 
 @login_required(login_url="/login/")
 def toggle_star_experience(request, experience_id):
@@ -300,7 +304,7 @@ def toggle_star_experience(request, experience_id):
         else:
             experience.starred_by.add(request.user)
 
-    return redirect("main:show_experiences")
+    return redirect("main:show_experience")
 
 @login_required(login_url="/login/")
 def toggle_star_skill(request, skill_id):
@@ -311,4 +315,58 @@ def toggle_star_skill(request, skill_id):
     else:
         skill.starred_by.add(request.user)
 
-    return redirect("main:show_skills")
+    return redirect("main:show_skill")
+
+@require_POST
+def create_education_ajax(request):
+    if not request.user.is_superuser:
+        return JsonResponse(
+            {"message": "Only the portfolio owner can add educations."},
+            status=403,
+        )
+
+    form = EducationForm(request.POST)
+    if form.is_valid():
+        education = form.save()
+        return JsonResponse(
+            {"message": "Education added succsessfully.", "pk": str(education.id)},
+            status=201,
+        )
+
+    return JsonResponse({"errors": form.errors.get_json_data()}, status=400)
+
+@require_POST
+def create_experience_ajax(request):
+    if not request.user.is_superuser:
+        return JsonResponse(
+            {"message": "Only the portfolio owner can add experiences."},
+            status=403,
+        )
+
+    form = ExperienceForm(request.POST)
+    if form.is_valid():
+        experience = form.save()
+        return JsonResponse(
+            {"message": "Experience added succsessfully.", "pk": str(experience.id)},
+            status=201,
+        )
+
+    return JsonResponse({"errors": form.errors.get_json_data()}, status=400)
+
+@require_POST
+def create_skill_ajax(request):
+    if not request.user.is_superuser:
+        return JsonResponse(
+            {"message": "Only the portfolio owner can add skills."},
+            status=403,
+        )
+
+    form = SkillForm(request.POST)
+    if form.is_valid():
+        skill = form.save()
+        return JsonResponse(
+            {"message": "Skill added succsessfully.", "pk": str(skill.id)},
+            status=201,
+        )
+
+    return JsonResponse({"errors": form.errors.get_json_data()}, status=400)

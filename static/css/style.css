@@ -254,124 +254,6 @@ h1, h2, h3, .brand, .nav-content, .section-title {
 }
 
 
-/* education */
-.education {
-    padding: 4.5rem 0 5rem;
-    border-top: 1px solid var(--line);
-    background-color: var(--carbon-black);
-}
-
-.education-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-}
-
-.education-card {
-    background-color: var(--light-lavender);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    box-shadow: 0 4px 12px rgba(49, 12, 76, 0.03);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.education-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 16px rgba(49, 12, 76, 0.08);
-}
-
-.education-card .degree {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--carbon-black);
-    margin-bottom: 0.35rem;
-}
-
-.education-card .institution {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-}
-
-.education-card .date {
-    font-weight: 600;
-    color: var(--blue-violet);
-}
-
-
-/* experiences */
-.experiences {
-    padding: 4.5rem 0 5rem;
-    border-top: 1px solid var(--line);
-}
-
-.experience-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.experience-card {
-    background-color: #ffffff;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 1.75rem;
-    box-shadow: 0 4px 12px rgba(49, 12, 76, 0.03);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.experience-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(49, 12, 76, 0.08);
-}
-
-.experience-header {
-    margin-bottom: 1rem;
-}
-
-.experience-card .role {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--dark-amethyst);
-}
-
-.experience-card .organization {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    font-weight: 500;
-}
-
-.experience-card .date {
-    font-weight: 600;
-    color: var(--blue-violet);
-}
-
-.experience-details {
-    list-style: none;
-    padding-left: 0;
-}
-
-.experience-details li {
-    position: relative;
-    padding-left: 1.25rem;
-    margin-bottom: 0.5rem;
-    font-size: 0.95rem;
-    color: var(--carbon-black);
-}
-
-.experience-details li:last-child {
-    margin-bottom: 0;
-}
-
-.experience-details li::before {
-    content: "•";
-    position: absolute;
-    left: 0;
-    color: var(--blue-violet);
-    font-weight: bold;
-}
-
-
 /* footer */
 .site-footer {
     padding: 2rem 1.5rem;
@@ -420,15 +302,13 @@ h1, h2, h3, .brand, .nav-content, .section-title {
     .social-links {
         justify-content: flex-start;
     }
-
-    .education-list {
-        grid-template-columns: 1fr;
-    }
 }
 
 
-/* Experience Page */
-.experience-section {
+/* Pages Sections (Experience, Education, Skills) */
+.experience-section,
+.education-section,
+.skill-section {
     padding: 4rem 0;
     border-top: 1px solid var(--line);
 }
@@ -441,106 +321,68 @@ h1, h2, h3, .brand, .nav-content, .section-title {
     text-transform: uppercase;
 }
 
-.experience-section h1 {
+.experience-section h1,
+.education-section h1,
+.skill-section h1 {
     margin: 0.4rem 0 1.5rem;
     font-size: 2rem;
 }
 
-.experience-grid {
+.experience-grid,
+.education-grid,
+.skill-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 1rem;
 }
 
-.experience-card {
+.experience-card,
+.education-card,
+.skill-card {
     padding: 1.25rem;
     background-color: #fff;
     border: 1px solid var(--line);
     border-radius: var(--radius);
 }
 
-.experience-category {
+.experience-category,
+.education-category,
+.skill-category {
     color: var(--dark-amethyst);
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
 }
 
-.experience-card h2 {
+.experience-card h2,
+.education-card h2,
+.skill-card h2 {
     margin: 0.5rem 0;
     font-size: 1.25rem;
 }
 
 .experience-description,
-.empty-state {
-    color: var(--text-muted);
-}
-
-.experience-status {
-    margin-top: 1rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-}
-
-
-/* Education Page */
-.education-section {
-    padding: 4rem 0;
-    border-top: 1px solid var(--line);
-}
-
-.section-kicker {
-    color: var(--dark-amethyst);
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-}
-
-.education-section h1 {
-    margin: 0.4rem 0 1.5rem;
-    font-size: 2rem;
-}
-
-.education-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1rem;
-}
-
-.education-card {
-    padding: 1.25rem;
-    background-color: #fff;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-}
-
-.education-category {
-    color: var(--dark-amethyst);
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-.education-card h2 {
-    margin: 0.5rem 0;
-    font-size: 1.25rem;
-}
-
 .education-school,
+.education-description,
+.skill-description,
 .empty-state {
     color: var(--text-muted);
+    margin-bottom: 1rem;
 }
 
-.education-status {
-    margin-top: 1rem;
+.experience-status,
+.education-status,
+.skill-status {
+    margin-top: 1.0rem;
     font-size: 0.85rem;
     font-weight: 600;
 }
+
 
 /* Forms */
 .education-form,
-.experience-form {
+.experience-form,
+.skill-form {
     width: 100%;
     max-width: 100%;
     margin-top: 1.5rem;
@@ -610,15 +452,9 @@ h1, h2, h3, .brand, .nav-content, .section-title {
     margin-bottom: 1.5rem;
 }
 
-.education-image {
-    display: block;
-    width: 100%;
-    height: auto;
-    border: 1px solid black;
-    border-radius: var(--radius);
-}
-
-.experience-image {
+.education-image,
+.experience-image,
+.skill-image {
     display: block;
     width: 100%;
     height: auto;
@@ -641,26 +477,32 @@ h1, h2, h3, .brand, .nav-content, .section-title {
     line-height: 1;
 }
 
-.form-search {
+.education-search-form,
+.experience-search-form,
+.skill-search-form {
     display: flex;
     gap: 0.75rem;
+    margin-top: 1.5rem;
     margin-bottom: 1.5rem;
 }
 
-.form-search__input {
+.education-search__input,
+.experience-search__input,
+.skill-search__input {
     width: 100%;
     min-width: 0;
     padding: 0.7rem;
-    border: 1px solid var(--line);
+    border: 1px solid var(--bright-lavender);
     border-radius: var(--radius);
     background: #fff;
-    color: var(--ink);
+    color: var(--carbon-black);
     font: inherit;
+    transition: border-color 0.2s ease, outline-color 0.2s ease;
 }
 
 .form-search__input:focus {
-    outline: 2px solid var(--accent);
-    border-color: var(--accent);
+    outline: 2px solid var(--blue-violet);
+    border-color: var(--bright-lavender);
 }
 
 .form-actions {
@@ -686,219 +528,10 @@ h1, h2, h3, .brand, .nav-content, .section-title {
     display: none !important;
 }
 
-.form-actions .experience-status {
-    margin-top: 0;
-}
 
-.experience-delete-modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    max-width: none;
-    max-height: none;
-    margin: 0;
-    padding: 1rem;
-    border: 0;
-    background: transparent;
-    z-index: 10;
-    align-items: center;
-    justify-content: center;
-}
-
-.education-delete-modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    max-width: none;
-    max-height: none;
-    margin: 0;
-    padding: 1rem;
-    border: 0;
-    background: transparent;
-    z-index: 10;
-    align-items: center;
-    justify-content: center;
-}
-
-.experience-delete-modal:popover-open {
-    display: flex;
-}
-
-.education-delete-modal:popover-open {
-    display: flex;
-}
-
-.experience-delete-modal__backdrop {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-    padding: 0;
-    background: rgba(28, 25, 23, 0.58);
-    cursor: default;
-}
-
-.education-delete-modal__backdrop {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-    padding: 0;
-    background: rgba(28, 25, 23, 0.58);
-    cursor: default;
-}
-
-.experience-delete-modal__content {
-    position: relative;
-    z-index: 1;
-    width: min(100%, 480px);
-    padding: 1.5rem;
-    background: var(--lavender-mist);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    box-shadow: 0 1rem 3rem rgba(28, 25, 23, 0.22);
-}
-
-.education-delete-modal__content {
-    position: relative;
-    z-index: 1;
-    width: min(100%, 480px);
-    padding: 1.5rem;
-    background: var(--lavender-mist);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    box-shadow: 0 1rem 3rem rgba(28, 25, 23, 0.22);
-}
-
-.experience-delete-modal__content h2 {
-    margin: 0 0 0.75rem;
-    font-family:
-        "Space Grotesk",
-        -apple-system,
-        sans-serif;
-    font-size: 1.5rem;
-}
-
-.education-delete-modal__content h2 {
-    margin: 0 0 0.75rem;
-    font-family:
-        "Space Grotesk",
-        -apple-system,
-        sans-serif;
-    font-size: 1.5rem;
-}
-
-.experience-delete-modal__close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    border: 0;
-    padding: 0;
-    background: transparent;
-    color: var(--text-muted);
-    font-size: 1.8rem;
-    line-height: 1;
-    cursor: pointer;
-}
-
-.education-delete-modal__close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    border: 0;
-    padding: 0;
-    background: transparent;
-    color: var(--text-muted);
-    font-size: 1.8rem;
-    line-height: 1;
-    cursor: pointer;
-}
-
-.experience-delete-modal__actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.75rem;
-    margin-top: 1.5rem;
-}
-
-.education-delete-modal__actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.75rem;
-    margin-top: 1.5rem;
-}
-
-.button-danger {
-    background: #d63429;
-}
-
-@media (max-width: 600px) {
-    .form-header {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .form-add-button {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .form-search {
-        flex-direction: column;
-    }
-
-    .form-search .button {
-        width: 100%;
-    }
-
-    .experience-delete-modal {
-        align-items: flex-end;
-        padding: 0;
-    }
-
-    .education-delete-modal {
-        align-items: flex-end;
-        padding: 0;
-    }
-
-    .experience-delete-modal__content {
-        width: 100%;
-        padding: 1.25rem;
-        border-radius: var(--radius) var(--radius) 0 0;
-    }
-
-    .education-delete-modal__content {
-        width: 100%;
-        padding: 1.25rem;
-        border-radius: var(--radius) var(--radius) 0 0;
-    }
-
-    .experience-delete-modal__actions {
-        flex-direction: column-reverse;
-    }
-
-    .education-delete-modal__actions {
-        flex-direction: column-reverse;
-    }
-
-    .experience-delete-modal__actions .button {
-        width: 100%;
-        text-align: center;
-    }
-
-    .education-delete-modal__actions .button {
-        width: 100%;
-        text-align: center;
-    }
-}
-
-/* Skills */
+/* Grouped Modals (Delete & Form Modals) */
+.experience-delete-modal, 
+.education-delete-modal, 
 .skill-delete-modal {
     display: none;
     position: fixed;
@@ -916,10 +549,14 @@ h1, h2, h3, .brand, .nav-content, .section-title {
     justify-content: center;
 }
 
+.experience-delete-modal:popover-open, 
+.education-delete-modal:popover-open, 
 .skill-delete-modal:popover-open {
     display: flex;
 }
 
+.experience-delete-modal__backdrop, 
+.education-delete-modal__backdrop, 
 .skill-delete-modal__backdrop {
     position: absolute;
     inset: 0;
@@ -931,6 +568,8 @@ h1, h2, h3, .brand, .nav-content, .section-title {
     cursor: default;
 }
 
+.experience-delete-modal__content, 
+.education-delete-modal__content, 
 .skill-delete-modal__content {
     position: relative;
     z-index: 1;
@@ -942,12 +581,16 @@ h1, h2, h3, .brand, .nav-content, .section-title {
     box-shadow: 0 1rem 3rem rgba(28, 25, 23, 0.22);
 }
 
+.experience-delete-modal__content h2, 
+.education-delete-modal__content h2, 
 .skill-delete-modal__content h2 {
     margin: 0 0 0.75rem;
     font-family: "Space Grotesk", -apple-system, sans-serif;
     font-size: 1.5rem;
 }
 
+.experience-delete-modal__close, 
+.education-delete-modal__close, 
 .skill-delete-modal__close {
     position: absolute;
     top: 1rem;
@@ -961,6 +604,8 @@ h1, h2, h3, .brand, .nav-content, .section-title {
     cursor: pointer;
 }
 
+.experience-delete-modal__actions, 
+.education-delete-modal__actions, 
 .skill-delete-modal__actions {
     display: flex;
     justify-content: flex-end;
@@ -968,26 +613,8 @@ h1, h2, h3, .brand, .nav-content, .section-title {
     margin-top: 1.5rem;
 }
 
-@media (max-width: 600px) {
-    .skill-delete-modal {
-        align-items: flex-end;
-        padding: 0;
-    }
-
-    .skill-delete-modal__content {
-        width: 100%;
-        padding: 1.25rem;
-        border-radius: var(--radius) var(--radius) 0 0;
-    }
-
-    .skill-delete-modal__actions {
-        flex-direction: column-reverse;
-    }
-
-    .skill-delete-modal__actions .button {
-        width: 100%;
-        text-align: center;
-    }
+.button-danger {
+    background: #d63429;
 }
 
 
@@ -1000,11 +627,11 @@ h1, h2, h3, .brand, .nav-content, .section-title {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    background: var(--ink);
+    background: var(--carbon-black);
 }
 
 .button-star.is-starred {
-    background: var(--accent);
+    background: var(--bright-lavender);
 }
 
 .star-count {
@@ -1015,8 +642,7 @@ h1, h2, h3, .brand, .nav-content, .section-title {
 }
 
 
-
-/* Toast shit */
+/* Toast component */
 .toast-component {
     position: fixed;
     inset: auto 2rem 2rem auto;
@@ -1028,7 +654,7 @@ h1, h2, h3, .brand, .nav-content, .section-title {
     align-items: center;
     gap: 1rem;
     transition: all 0.3s ease;
-    background-color: var(white);
+    background-color: #ffffff;
     border: 1px solid var(--line);
     color: inherit;
 }
@@ -1060,7 +686,172 @@ h1, h2, h3, .brand, .nav-content, .section-title {
     color: var(--text-muted);
 }
 
-/* Modifikasi border kiri berdasarkan tipe notifikasi */
 .toast-success { border-left: 4px solid #22c55e; }
 .toast-error { border-left: 4px solid #b42318; }
-.toast-normal { border-left: 4px solid var(--accent); }
+.toast-normal { border-left: 4px solid var(--blue-violet); }
+
+
+/* Modal Forms */
+.experience-form-modal, 
+.education-form-modal, 
+.skill-form-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 1rem;
+    border: 0;
+    background: transparent;
+    z-index: 10;
+    align-items: center;
+    justify-content: center;
+}
+
+.experience-form-modal:popover-open, 
+.education-form-modal:popover-open, 
+.skill-form-modal:popover-open {
+    display: flex;
+}
+
+.experience-form-modal__backdrop,
+.education-form-modal__backdrop, 
+.skill-form-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    padding: 0;
+    background: rgba(28, 25, 23, 0.58);
+    cursor: default;
+}
+
+.experience-form-modal__content, 
+.education-form-modal__content, 
+.skill-form-modal__content {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 640px);
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+    padding: 1.5rem;
+    background: var(--lavender-mist);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: 0 1rem 3rem rgba(28, 25, 23, 0.22);
+}
+
+.experience-form-modal__content h2, 
+.education-form-modal__content h2, 
+.skill-form-modal__content h2 {
+    margin: 0 2.5rem 1.25rem 0;
+    font-family: "Space Grotesk", -apple-system, sans-serif;
+    font-size: 1.5rem;
+}
+
+.experience-form-modal__close, 
+.education-form-modal__close, 
+.skill-form-modal__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.experience-form-modal__actions, 
+.education-form-modal__actions, 
+.skill-form-modal__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+
+/* Responsive Media Queries */
+@media (max-width: 600px) {
+    .form-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .form-add-button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .form-search {
+        flex-direction: column;
+    }
+
+    .form-search .button {
+        width: 100%;
+    }
+
+    .experience-delete-modal,
+    .education-delete-modal,
+    .skill-delete-modal {
+        align-items: flex-end;
+        padding: 0;
+    }
+
+    .experience-delete-modal__content,
+    .education-delete-modal__content,
+    .skill-delete-modal__content {
+        width: 100%;
+        padding: 1.25rem;
+        border-radius: var(--radius) var(--radius) 0 0;
+    }
+
+    .experience-delete-modal__actions,
+    .education-delete-modal__actions,
+    .skill-delete-modal__actions {
+        flex-direction: column-reverse;
+    }
+
+    .experience-delete-modal__actions .button,
+    .education-delete-modal__actions .button,
+    .skill-delete-modal__actions .button {
+        width: 100%;
+        text-align: center;
+    }
+
+    .experience-form-modal, 
+    .education-form-modal, 
+    .skill-form-modal {
+        align-items: flex-end;
+        padding: 0;
+    }
+
+    .experience-form-modal__content, 
+    .education-form-modal__content, 
+    .skill-form-modal__content {
+        width: 100%;
+        max-height: 90vh;
+        padding: 1.25rem;
+        border-radius: var(--radius) var(--radius) 0 0;
+    }
+
+    .experience-form-modal__actions, 
+    .education-form-modal__actions, 
+    .skill-form-modal__actions {
+        flex-direction: column-reverse;
+    }
+
+    .experience-form-modal__actions .button, 
+    .education-form-modal__actions .button, 
+    .skill-form-modal__actions .button {
+        width: 100%;
+        text-align: center;
+    }
+}

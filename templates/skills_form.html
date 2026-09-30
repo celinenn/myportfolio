@@ -6,12 +6,12 @@
 
 {% block content %}
     <main>
-        <section class="experience-section">
+        <section class="skill-section">
             <div class="container">
                 <h1>Add New Skill</h1>
                 <form method="post"
                       action="{% url 'main:create_skill' %}"
-                      class="experience-form">
+                      class="skill-form">
                     {% csrf_token %}
                     {% for field in form %}
                         <div class="form-group">
