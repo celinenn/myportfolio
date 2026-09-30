@@ -114,3 +114,28 @@ Proses saya mengerjakan Tugas ini:
 2. Selanjutnya saya mengecek apakah servernya tetap bisa run dengan python manage.py runserver, jika sudah OK saya lanjut push ke github
 
 3. Saya akhiri pengerjaan Tugas 4 ini dengan mengisi README.md ini
+
+
+
+============== Pertanyaan Relatif ==============
+
+### Tugas 5
+
+1. Debouncing merupakan teknik untuk membatasi seberapa sering sebuah fungsi dieksekusi. Fungsi hanya akan dijalankan setelah jeda waktu tertentu berlalu sejak event terakhir berhenti. Basically sebagai buffering. Tanpa debouncing ini, setiap huruf yang diketik pengguna akan langsung memicu request AJAX ke server secara bersamaan. Hal ini akan membebani server dengan request yang tidak perlu dan menyebabkan race condition (respon data datang tidak berurutan). Dengan debouncing, request baru dikirim setelah pengguna selesai atau berhenti mengetik sejenak.
+
+2. Fungsi await menghentikan eksekusi kode di dalam fungsi async sementara waktu hingga Promise dari fetch() selesai (yaitu sampai server merespon dan data berhasil diterima). Jika tidak menggunakan await, JavaScript akan melanjutkan eksekusi baris kode berikutnya secara langsung sebelum data dari server benar-benar siap. Akibatnya, variabel yang menampung hasil fetch() akan berupa objek Promise yang masih berstatus pending (belum berisi data JSON yang sebenarnya), bukan data yang kita harapkan.
+
+3. AJAX/JavaScript lebih rentan karena ketika kita merender data menggunakan JavaScript (seperti mengisi innerHTML dengan data mentah dari respon AJAX), browser akan mengeksekusi tag HTML/JS apa adanya jika tidak disanitasi dengan benar. Sebaliknya, sistem templating bawaan Django secara otomatis melakukan auto-escaping pada variabel yang ditampilkan di HTML standar, sehingga karakter khusus seperti < atau > akan diubah menjadi aman (di-encode) dan script berbahaya tidak akan tereksekusi.
+
+
+-------------- Pernyataan Penggunaan AI --------------
+
+Saya TIDAK munggunakan bantuan AI sama sekali dalam pengerjaan Tugas 5 ini. Saya hanya mengikuti langkah-langkah dari Tutorial 5.
+
+Proses saya mengerjakan Tugas ini:
+
+1. Saya ikuti langkah-langkah pada Tutorial 5 satu persatu dan mengimplementasikan JavaScript etc. pada setiap model pada portfolio saya.
+
+2. Selanjutnya saya mengecek dengan python manage.py runserver untuk mengecek apakah semuanya sudah berjalan dengan aman.
+
+6. Jika sudah OK runnya, saya push ke github dan pws dan mengakhiri pengerjaan Tugas ini dengan menulis README.md ini.
