@@ -477,9 +477,9 @@ h1, h2, h3, .brand, .nav-content, .section-title {
     line-height: 1;
 }
 
-.education-search-form,
-.experience-search-form,
-.skill-search-form {
+.education-search,
+.experience-search,
+.skill-search {
     display: flex;
     gap: 0.75rem;
     margin-top: 1.5rem;
@@ -530,8 +530,8 @@ h1, h2, h3, .brand, .nav-content, .section-title {
 
 
 /* Grouped Modals (Delete & Form Modals) */
-.experience-delete-modal, 
-.education-delete-modal, 
+.experience-delete-modal,
+.education-delete-modal,
 .skill-delete-modal {
     display: none;
     position: fixed;
