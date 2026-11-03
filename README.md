@@ -139,3 +139,41 @@ Proses saya mengerjakan Tugas ini:
 2. Selanjutnya saya mengecek dengan python manage.py runserver untuk mengecek apakah semuanya sudah berjalan dengan aman.
 
 6. Jika sudah OK runnya, saya push ke github dan pws dan mengakhiri pengerjaan Tugas ini dengan menulis README.md ini.
+
+
+
+============== Pertanyaan Relatif ==============
+
+### Tugas 6
+
+1. REST (Representational State Transfer) merupakan gaya arsitektur untuk merancang web API yang memperlakukan data sebagai resource, menggunakan HTTP method standar untuk tindakan, dan bersifat stateless. JSON saja belum cukup karena yang menentukan RESTful adalah tata cara pengaturannya (seperti penggunaan URL resource yang konsisten, pemanfaatan method HTTP yang tepat seperti GET/POST/PUT/DELETE, dan pertukaran representasi data). Mengembalikan format JSON pada endpoint acak tidak serta-merta membuatnya memenuhi prinsip arsitektur REST.
+
+Perbedaan antara PUT dan PATCH adalah bahwa PUT merupakan pengiriman representasi pengganti secara penuh (full replacement), yang berarti seluruh field wajib harus disertakan. Sedankang, PATCH merupakan pengiriman pembaruan sebagian (partial update), di mana hanya field yang ingin diubah saja yang dikirim, sementara field lainnya dibiarkan menggunakan nilai lama (partial=True).
+
+2. Peran dari serializer adalah bekerja dua arah sebagai jembatan konversi data. Saat GET, serializer mengubah objek model menjadi tipe data Python yang siap dirender ke JSON (serialization); sebaliknya, saat POST/PATCH, serializer mendeserialisasi dan memvalidasi input klien menjadi data yang siap disimpan (deserialization). Keuntungannya dibandingkan manual adalah:
+- Tidak perlu lagi merakit dictionary field per field secara manual di dalam loop
+- Menyediakan validasi otomatis yang terstruktur per field seperi is_valid()
+- Memanfaatkan ModelSerializer yang secara otomatis mengenali definisi model untuk operasi create dan update tanpe kode berulang
+
+3. Autentikasi menjawab "siapa kamu" (mengenali identitas pengirim lewat token/session dan mengisi request.user), sedangkan otorisasi (hak akses) menjawab "apa yang boleh kamu lakukan" (memutuskan apakah request tersebut diizinkan berdasarkan aturan tertentu).
+
+Hak akses harus diperiksa di server via permission class karena tindak menyembunyikan tombol di template HTML sisi klien hanyalah pengalaman antarmuka (UI/UX) dan bersifat kosmetik. Pengguna usil tetap bisa mengirim request HTTP langsung (lewat tools seperti Postman, cURL, atau browser console) ke endpoint API server. Oleh karena itu, permission class di server wajib ada untuk mengamankan data secara nyata dan mencegah akses ilegal.
+
+4. Kita perlu token CSRF karena SessionAuthentication mengandalkan cookie session Django yang otomatis dikirim oleh browser, aplikasi rentan terhadap serangan CSRF (Cross-Site Request Forgery). Token CSRF wajib disertakan pada permintaan yang mengubah data (POST, PUT, PATCH, DELETE) untuk memastikan request benar-benar dikirim secara sah dari aplikasi web asli, bukan dari situs eksternal berbahaya.
+
+force_authenticate tidak cukup karena method force_authenticate dalam pengujian mem-bypass proses login riil dan langsung menyuntikkan objek user ke dalam request secara instan, sehingga ia tidak menguji mekanisme validasi cookie session ataupun pemeriksaan token CSRF yang sesungguhnya. Untuk mengujinya secara tuntas, diperlukan client khusus dengan pemeriksaan CSRF aktif (enforce_csrf_checks=True) beserta fungsi .login() yang asli.
+
+
+-------------- Pernyataan Penggunaan AI --------------
+
+Saya TIDAK munggunakan bantuan AI sama sekali dalam pengerjaan Tugas 6 ini. Saya hanya mengikuti langkah-langkah dari Tutorial 7.
+
+Proses saya mengerjakan Tugas ini:
+
+1. Saya ikuti langkah-langkah pada Tutorial 7 satu persatu dan mengimplementasikan serializer, permission, dan APi view dan url pada setiap model pada portfolio saya.
+
+2. Selanjutnya saya mengecek dengan python manage.py runserver dan python manage.py test untuk mengecek apakah semuanya sudah berjalan dengan aman.
+
+3. Jika belum aman, saya revisi tests.py saya dan mencoba run test lagi.
+
+6. Jika sudah OK test dan runnya, saya push ke github dan pws dan mengakhiri pengerjaan Tugas ini dengan menulis README.md ini.
