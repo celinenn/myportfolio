@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404
+from django.urls import path
 from rest_framework import status
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.decorators import (
@@ -11,6 +12,13 @@ from main.models import *
 from main.permissions import IsPortfolioOwnerOrReadOnly
 from main.serializers import *
 
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def api_logout(request):
+    if request.auth is not None:
+        request.auth.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(["GET", "HEAD", "POST"])
 @authentication_classes([SessionAuthentication])
